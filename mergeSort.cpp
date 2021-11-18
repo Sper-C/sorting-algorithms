@@ -95,32 +95,39 @@ int mergeSort(int *a, int left, int right)
     return merge(a, left, mid, right);
 }
 
-void measure(string sort)
+void measure()
 {
     int n;
     int *a = initRandomArray(n);
-    printArray(a, n);
     int count_compare = 0;
 
-    if (sort == "merge")
+    cout << "Display?\nYes: 1\nNo: 0" << endl;
+    int choice;
+    cin >> choice;
+    if (choice == 1)
     {
-        auto start = high_resolution_clock::now();
-        count_compare = mergeSort(a, 0, n - 1);
-        auto stop = high_resolution_clock::now();
-        auto runtime = stop - start;
-        cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
+        printArray(a, n);
     }
+
+    auto start = high_resolution_clock::now();
+    count_compare = mergeSort(a, 0, n - 1);
+    auto stop = high_resolution_clock::now();
+    auto runtime = stop - start;
+    cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
 
     cout << "Comparision time: " << count_compare << endl;
     cout << "--------------------- " << endl;
     cout << "--------------------- " << endl;
 
-    printArray(a, n);
+    if (choice == 1)
+    {
+        printArray(a, n);
+    }
 }
 
 int main()
 {
-    measure("merge");
+    measure();
 
     system("pause");
     return 0;

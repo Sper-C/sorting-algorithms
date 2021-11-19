@@ -2,6 +2,9 @@
 #include <fstream>
 #include <cmath>
 #include <time.h>
+#include <fstream>
+#include <string>
+#include <vector>
 using namespace std;
 
 template <class T>
@@ -80,11 +83,30 @@ void GenerateData(int a[], int n, int dataType)
 	}
 }
 
-int main() {
-	int datatype = 0;
-	while (datatype != -1) {
-		cout << "Nhap mode: ";
-		cin >> datatype;
+void createDatatoFile() {
+	//create array of int with 6 integers
+	int numarr[6] = { 10000, 30000, 50000, 100000, 300000, 500000 };
+	string mode[4] = { "Random", "Sorted", "Reversed", "NearlySorted" };
+	for (int j = 0; j < 4; j++) {
+		for (int k = 0; k < 6; k++) {
+			fstream file;
+			string path = "./" + mode[j] + "/" + to_string(numarr[k]) + ".txt";
+			file.open(path, ios::out);
+			if (file.fail()) cout << "Error!";
+			{
+				int* data = new int[numarr[k]];
+				GenerateData(data, numarr[k], j);
+				file << numarr[k] << endl;
+				for (int i = 0; i < numarr[k]; i++) {
+					file << data[i] << " ";
+				}
+				file.close();
+			}
+		}
 	}
-	
+}
+
+int main() {
+	createDatatoFile();
+	return 0;
 }

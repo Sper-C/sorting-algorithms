@@ -1,37 +1,5 @@
 #include "merge.h"
 
-int randomNumber(int n)
-{
-    return rand() % (n - 1 + 1) + 1;
-}
-
-int *initRandomArray(int &n)
-{
-    cout << "How many elements?" << endl;
-    cin >> n;
-    cout << "Size of element?" << endl;
-    int size;
-    cin >> size;
-    int *arr = new int[n];
-
-    srand(time(0));
-
-    for (int i = 0; i < n; i++)
-    {
-        arr[i] = randomNumber(size);
-    }
-    return arr;
-}
-
-void printArray(int *a, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        cout << a[i] << " ";
-    }
-    cout << endl;
-}
-
 int mergeExper(int *a, int left, int mid, int right, int &count_compare)
 {
     int *temp = new int[right - left + 1];
@@ -40,11 +8,11 @@ int mergeExper(int *a, int left, int mid, int right, int &count_compare)
     int i = left;
     int j = mid + 1;
 
-    // while ((++count_compare && i <= mid) && (++count_compare && j <= right))
-    while (i <= mid && j <= right)
+    while ((++count_compare && i <= mid) && (++count_compare && j <= right))
+    // while (i <= mid && j <= right)
     {
-        // if (++count_compare && a[i] <= a[j])
-        if (a[i] <= a[j])
+        if (++count_compare && a[i] <= a[j])
+        // if (a[i] <= a[j])
         {
             temp[k++] = a[i++];
         }
@@ -54,19 +22,19 @@ int mergeExper(int *a, int left, int mid, int right, int &count_compare)
         }
         count_compare += 1;
     }
-    // while (++count_compare && i <= mid)
-    while (i <= mid)
+    while (++count_compare && i <= mid)
+    // while (i <= mid)
     {
         temp[k++] = a[i++];
     }
-    // while (++count_compare && j <= right)
-    while (j <= right)
+    while (++count_compare && j <= right)
+    // while (j <= right)
     {
         temp[k++] = a[j++];
     }
 
-    // for (int i = left; ++count_compare && i <= right; i++)
-    for (int i = left; i <= right; i++)
+    for (int i = left; ++count_compare && i <= right; i++)
+    // for (int i = left; i <= right; i++)
     {
         a[i] = temp[i - left];
     }
@@ -74,7 +42,7 @@ int mergeExper(int *a, int left, int mid, int right, int &count_compare)
 
 void mergeSortExper(int *a, int left, int right, int &count_compare)
 {
-    if (left >= right)
+    if (++count_compare && left >= right)
     {
         return;
     }

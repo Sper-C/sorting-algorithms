@@ -57,10 +57,7 @@ int *initInputArray(string file, int &n)
 
 int main(int agrc, char **argv)
 {
-    int n;
-    int* arr = initRandomArray(n);
-    flashSort(arr, n);
-    printArray(arr,n);
+    measure();
     system("pause");
     return 0;
 }

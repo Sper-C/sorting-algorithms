@@ -1,30 +1,6 @@
 #include "flash.h"
 
-void swap(int &a, int &b)
-{
-    a = a + b;
-    b = a - b;
-    a = a - b;
-}
-
-void insertionSort(int *a, int n)
-{
-    for (int i = 1; i < n; i++)
-    {
-        int x = a[i];
-        int j;
-        for (j = i - 1; j >= 0 && a[j] > x; j--)
-        {
-            //*So sánh với phần tử trước đó (i-1), nếu bé hơn thì bắt đầu dời chỗ.
-            //*Dời chỗ cho đến khi gặp phần tử nhỏ hơn phần tử thứ i hồi nãy (x).
-            a[j + 1] = a[j];
-        }
-        //*Sau đó chèn phần tử i hồi nãy (x) vào vị trí đã tìm ở vòng lặp trên.
-        a[j + 1] = x;
-    }
-}
-
-void flashSort(int *a, int n)
+void flashSortExperiment(int *a, int n)
 {
     int minVal = a[0];
     int max = 0;
@@ -78,5 +54,33 @@ void flashSort(int *a, int n)
     insertionSort(a, n);
 }
 
+void measure()
+{
+    int n;
+    int *a = initRandomArray(n);
+    int count_compare = 0;
 
+    cout << "Display?\nYes: 1\nNo: 0" << endl;
+    int choice;
+    cin >> choice;
+    if (choice == 1)
+    {
+        printArray(a, n);
+    }
+
+    auto start = high_resolution_clock::now();
+    // count_compare = flashSort(a, n);
+    auto stop = high_resolution_clock::now();
+    auto runtime = stop - start;
+    cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
+
+    cout << "Comparision time: " << count_compare << endl;
+    cout << "--------------------- " << endl;
+    cout << "--------------------- " << endl;
+
+    if (choice == 1)
+    {
+        printArray(a, n);
+    }
+}
 

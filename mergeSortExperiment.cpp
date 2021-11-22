@@ -1,5 +1,4 @@
 #include "merge.h"
-int count_compare = 0;
 
 int randomNumber(int n)
 {
@@ -33,7 +32,7 @@ void printArray(int *a, int n)
     cout << endl;
 }
 
-int mergeExper(int *a, int left, int mid, int right)
+int mergeExper(int *a, int left, int mid, int right, int &count_compare)
 {
     int *temp = new int[right - left + 1];
 
@@ -73,23 +72,23 @@ int mergeExper(int *a, int left, int mid, int right)
     }
 }
 
-void mergeSortExper(int *a, int left, int right)
+void mergeSortExper(int *a, int left, int right, int &count_compare)
 {
     if (left >= right)
     {
         return;
     }
     int mid = (left + right) / 2;
-    mergeSortExper(a, left, mid);
-    mergeSortExper(a, mid + 1, right);
-    mergeExper(a, left, mid, right);
+    mergeSortExper(a, left, mid, count_compare);
+    mergeSortExper(a, mid + 1, right, count_compare);
+    mergeExper(a, left, mid, right, count_compare);
 }
 
 void measure()
 {
     int n;
     int *a = initRandomArray(n);
-
+    int count_compare = 0;
     cout << "Display?\nYes: 1\nNo: 0" << endl;
     int choice;
     cin >> choice;
@@ -99,7 +98,7 @@ void measure()
     }
 
     auto start = high_resolution_clock::now();
-    mergeSortExper(a, 0, n - 1);
+    mergeSortExper(a, 0, n - 1,count_compare);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;

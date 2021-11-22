@@ -26,57 +26,59 @@ void insertionSort(int *a, int n)
 
 void flashSort(int *a, int n)
 {
-    int minVal = a[0];
-    int max = 0;
+    //*Khởi tạo các bucket
     int m = int(0.45 * n);
     int *l = new int[m];
     for (int i = 0; i < m; i++)
         l[i] = 0;
+    //*Tìm max và min
+    int min = a[0];
+    int max = 0;
     for (int i = 1; i < n; i++)
     {
-        if (a[i] < minVal)
-            minVal = a[i];
-        if (a[i] > a[max])
-            max = i;
+        if (a[i] < min)
+            min = a[i];
+        if (a[i] > max)
+            max = a[i];
     }
-    if (a[max] == minVal)
+    //*Chỉ có một phần tử thì kết thúc
+    if (max == min)
         return;
-    double c1 = (double)(m - 1) / (a[max] - minVal);
+    //*Đếm số phần tử trong xô
+    double c1 = (double)(m - 1) / (a[max] - min);
     for (int i = 0; i < n; i++)
     {
-        int k = int(c1 * (a[i] - minVal));
-        ++l[k];
+        int k = int(c1 * (a[i] - min));
+        l[k]++;
     }
+    //*Tính index cuối cùng của từng bucket
     for (int i = 1; i < m; i++)
         l[i] += l[i - 1];
-    swap(a[max], a[0]);
-    int nmove = 0;
-    int j = 0;
-    int k = m - 1;
+    //*Hoán vị các phần tử
+    int hold = a[0];
+    int move = 0;
+    int flash = 0;
+    int k = 0;
     int t = 0;
-    int flash;
-    while (nmove < n - 1)
+    int j = 0;
+    while (move < n - 1)
     {
-        while (j > l[k] - 1)
+        while(j > (l[k]-1))
         {
             j++;
-            k = int(c1 * (a[j] - minVal));
         }
+        
         flash = a[j];
-        if (k < 0)
-            break;
-        while (j != l[k])
+        while(j!=l[k])
         {
-            k = int(c1 * (flash - minVal));
-            int hold = a[t = --l[k]];
-            a[t] = flash;
+            double c1 = (double)(m - 1) / (a[max] - min);
+            int k = int(c1 * (a[j] - min));
+            hold = a[t=--l[k]];
+            a[t] = hold;
             flash = hold;
-            ++nmove;
+            move++;
         }
     }
-    delete[] l;
+    //*Insertion Sort
     insertionSort(a, n);
 }
-
-
-

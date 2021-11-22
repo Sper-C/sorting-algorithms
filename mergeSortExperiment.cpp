@@ -1,6 +1,6 @@
 #include "merge.h"
 
-int mergeExper(int *a, int left, int mid, int right, int &count_compare)
+int merge(int *a, int left, int mid, int right, int &count_compare)
 {
     int *temp = new int[right - left + 1];
 
@@ -9,10 +9,8 @@ int mergeExper(int *a, int left, int mid, int right, int &count_compare)
     int j = mid + 1;
 
     while ((++count_compare && i <= mid) && (++count_compare && j <= right))
-    // while (i <= mid && j <= right)
     {
         if (++count_compare && a[i] <= a[j])
-        // if (a[i] <= a[j])
         {
             temp[k++] = a[i++];
         }
@@ -23,33 +21,30 @@ int mergeExper(int *a, int left, int mid, int right, int &count_compare)
         count_compare += 1;
     }
     while (++count_compare && i <= mid)
-    // while (i <= mid)
     {
         temp[k++] = a[i++];
     }
     while (++count_compare && j <= right)
-    // while (j <= right)
     {
         temp[k++] = a[j++];
     }
 
     for (int i = left; ++count_compare && i <= right; i++)
-    // for (int i = left; i <= right; i++)
     {
         a[i] = temp[i - left];
     }
 }
 
-void mergeSortExper(int *a, int left, int right, int &count_compare)
+void mergeSort(int *a, int left, int right, int &count_compare)
 {
     if (++count_compare && left >= right)
     {
         return;
     }
     int mid = (left + right) / 2;
-    mergeSortExper(a, left, mid, count_compare);
-    mergeSortExper(a, mid + 1, right, count_compare);
-    mergeExper(a, left, mid, right, count_compare);
+    mergeSort(a, left, mid, count_compare);
+    mergeSort(a, mid + 1, right, count_compare);
+    merge(a, left, mid, right, count_compare);
 }
 
 void measure()
@@ -66,7 +61,7 @@ void measure()
     }
 
     auto start = high_resolution_clock::now();
-    mergeSortExper(a, 0, n - 1,count_compare);
+    mergeSort(a, 0, n - 1,count_compare);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;

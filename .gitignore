@@ -41,3 +41,5 @@
 /.vs/ProjectSettings.json
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
+/.vs/sorting-algorithms/v16/ipch/AutoPCH/5e137fb2fcfbd104/SHELLSORT.ipch
+/.vs/sorting-algorithms/v16/ipch/AutoPCH/9dbc6950c8cb514c/RADIXSORT.ipch

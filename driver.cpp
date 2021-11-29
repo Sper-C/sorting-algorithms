@@ -57,7 +57,10 @@ int *initInputArray(string file, int &n)
 
 int main(int agrc, char **argv)
 {
-    measure();
+    int n;
+    int *a = initRandomArray(n);
+
+    measureMerge(a, n);
 
     system("pause");
     return 0;

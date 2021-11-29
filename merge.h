@@ -7,7 +7,4 @@
 using namespace std;
 using namespace std::chrono;
 
-int *initRandomArray(int &n);
-void printArray(int *a, int n);
-
-void measure();
+void measureMerge(int* a,int n);

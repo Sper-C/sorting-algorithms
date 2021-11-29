@@ -18,7 +18,6 @@ int merge(int *a, int left, int mid, int right, int &count_compare)
         {
             temp[k++] = a[j++];
         }
-        count_compare += 1;
     }
     while (++count_compare && i <= mid)
     {
@@ -47,21 +46,11 @@ void mergeSort(int *a, int left, int right, int &count_compare)
     merge(a, left, mid, right, count_compare);
 }
 
-void measure()
+void measureMerge(int* a, int n)
 {
-    int n;
-    int *a = initRandomArray(n);
     int count_compare = 0;
-    cout << "Display?\nYes: 1\nNo: 0" << endl;
-    int choice;
-    cin >> choice;
-    if (choice == 1)
-    {
-        printArray(a, n);
-    }
-
     auto start = high_resolution_clock::now();
-    mergeSort(a, 0, n - 1,count_compare);
+    mergeSort(a, 0, n - 1, count_compare);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
@@ -69,9 +58,4 @@ void measure()
     cout << "Comparision time: " << count_compare << endl;
     cout << "--------------------- " << endl;
     cout << "--------------------- " << endl;
-
-    if (choice == 1)
-    {
-        printArray(a, n);
-    }
 }

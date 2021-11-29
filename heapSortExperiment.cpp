@@ -1,6 +1,6 @@
 #include "heap.h"
 
-void heapify(int *arr, int n, int i, int &count_compare)
+void heapifyCompare(int *arr, int n, int i, int &count_compare)
 {
     int largest = i;
     int l = 2 * i + 1;
@@ -16,24 +16,24 @@ void heapify(int *arr, int n, int i, int &count_compare)
     {
         swap(arr[i], arr[largest]);
 
-        heapify(arr, n, largest, count_compare);
+        heapifyCompare(arr, n, largest, count_compare);
     }
 }
 
-int heapSort(int *arr, int n)
+int countHeapSortCompare(int *arr, int n)
 {
     int count_compare = 0;
 
     for (int i = n / 2 - 1; ++count_compare && i >= 0; i--)
     {
-        heapify(arr, n, i, count_compare);
+        heapifyCompare(arr, n, i, count_compare);
     }
 
     for (int i = n - 1; ++count_compare && i > 0; i--)
     {
         swap(arr[0], arr[i]);
 
-        heapify(arr, i, 0, count_compare);
+        heapifyCompare(arr, i, 0, count_compare);
     }
 
     return count_compare;
@@ -54,7 +54,7 @@ void measure()
     }
 
     auto start = high_resolution_clock::now();
-    count_compare = heapSort(a, n);
+    count_compare = countHeapSortCompare(a, n);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;

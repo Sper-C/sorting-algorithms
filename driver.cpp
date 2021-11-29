@@ -59,7 +59,10 @@ int main(int agrc, char **argv)
 {
     int n;
     int *a = initRandomArray(n);
-    measureHeap(a, n);
+
+    cout<<"-------------"<<endl;
+    cout<<"Run Time: "<<measureHeapTime(a,n)<<endl;
+    cout<<"Comparison: "<<measureHeapComp(a,n)<<endl;
 
     system("pause");
     return 0;

@@ -7,4 +7,6 @@
 using namespace std;
 using namespace std::chrono;
 
-void measureHeap(int* a,int n);
+int heapSort(int *arr, int n);
+int measureHeapComp(int *a, int n);
+double measureHeapTime(int *a, int n);

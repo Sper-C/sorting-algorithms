@@ -22,8 +22,6 @@ void heapify(int *arr, int n, int i)
 
 int heapSort(int *arr, int n)
 {
-    int count_compare = 0;
-
     for (int i = n / 2 - 1; i >= 0; i--)
     {
         heapify(arr, n, i);
@@ -35,6 +33,4 @@ int heapSort(int *arr, int n)
 
         heapify(arr, i, 0);
     }
-
-    return count_compare;
 }

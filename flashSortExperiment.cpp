@@ -16,7 +16,7 @@ int insertionSortComp(int *a, int n)
     return count_compare;
 }
 
-void flashSortComp(int a[], int n,int &count_compare)
+void flashSortComp(int a[], int n, long long &count_compare)
 {
     int m = int(0.45 * n);
     int *l = new int[m];
@@ -24,7 +24,7 @@ void flashSortComp(int a[], int n,int &count_compare)
     {
         l[i] = 0;
     }
-    
+
     int max = 0;
     int minVal = a[0];
     for (int i = 1; ++count_compare && i < n; i++)
@@ -79,17 +79,10 @@ void flashSortComp(int a[], int n,int &count_compare)
     count_compare += insertionSortComp(a, n);
 }
 
-int measureFlashComp(int *a, int n)
-{
-    int count_compare = 0;
-    flashSortComp(a,n,count_compare);
-    return count_compare;
-}
-
-double measureFlashTime(int * a,int n)
+double measureFlash(int *a, int n, long long &count_compare)
 {
     auto start = high_resolution_clock::now();
-    flashSort(a, n);
+    flashSortComp(a, n, count_compare);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     return duration<double, milli>(runtime).count();

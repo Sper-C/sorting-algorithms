@@ -27,9 +27,10 @@ int main(int agrc, char **argv)
 {
     int n;
     int * a = initRandomArray(n);
+    long long count_compare = 0;
     cout<<"-------------------------"<<endl;
-    cout<<"Run time: "<< measureFlashTime(a,n)<<endl;
-    cout<<"Comparison: "<<measureFlashComp(a,n)<<endl;
+    cout<<"Running Time: "<<measureFlash(a,n,count_compare)<<endl;
+    cout<<"Comparisions: "<<count_compare<<endl;
     
     system("pause");
     return 0;

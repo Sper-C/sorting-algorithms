@@ -32,29 +32,6 @@ int *initRandomArray(int &n)
     return arr;
 }
 
-int *initInputArray(string file, int &n)
-{
-    fstream f(file, ios::in);
-
-    string size;
-    getline(f, size);
-    n = stoi(size);
-    int *arr = new int[n];
-
-    for (int i = 0; i < n; i++)
-    {
-        string num;
-        f >> num;
-        if (num != " ")
-        {
-            arr[i] = stoi(num);
-        }
-    }
-
-    f.close();
-    return arr;
-}
-
 int main(int agrc, char **argv)
 {
     int n;

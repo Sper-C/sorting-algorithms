@@ -1,6 +1,6 @@
 #include "merge.h"
 
-int merge(int *a, int left, int mid, int right, int &count_compare)
+int merge(int *a, int left, int mid, int right, long long &count_compare)
 {
     int *temp = new int[right - left + 1];
 
@@ -34,7 +34,7 @@ int merge(int *a, int left, int mid, int right, int &count_compare)
     }
 }
 
-void mergeSort(int *a, int left, int right, int &count_compare)
+void mergeSort(int *a, int left, int right, long long &count_compare)
 {
     if (++count_compare && left >= right)
     {
@@ -46,17 +46,10 @@ void mergeSort(int *a, int left, int right, int &count_compare)
     merge(a, left, mid, right, count_compare);
 }
 
-int measureMergeComp(int *a, int n)
-{
-    int count_compare = 0;
-    mergeSort(a, 0, n - 1, count_compare);
-    return count_compare;
-}
-
-double measureMergeTime(int *a, int n)
+double measureMerge(int* a,int n,long long &count_compare)
 {
     auto start = high_resolution_clock::now();
-    mergeSort(a, 0, n - 1);
+    mergeSort(a, 0, n - 1,count_compare);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     return duration<double, milli>(runtime).count();

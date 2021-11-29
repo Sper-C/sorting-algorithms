@@ -7,6 +7,4 @@
 using namespace std;
 using namespace std::chrono;
 
-int mergeSort(int *a, int left, int right);
-int measureMergeComp(int *a, int n);
-double measureMergeTime(int *a, int n);
+double measureMerge(int* a,int n,long long &count_compare);

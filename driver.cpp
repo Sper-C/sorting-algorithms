@@ -59,11 +59,10 @@ int main(int agrc, char **argv)
 {
     int n;
     int *a = initRandomArray(n);
-
+    long long count_compare = 0;
     cout << "-----------------------" << endl;
-    cout << "Run Time: " << measureMergeTime(a, n)<<endl;
-    cout << "Comparison: " << measureMergeComp(a, n)<<endl;
-
+    cout << "Run Time: " << measureMerge(a, n,count_compare) << endl;
+    cout << "Comparison: " << count_compare<<endl;
     system("pause");
     return 0;
 }

@@ -1,6 +1,6 @@
 #include "heap.h"
 
-void heapifyCompare(int *arr, int n, int i, int &count_compare)
+void heapify(int *arr, int n, int i, int &count_compare)
 {
     int largest = i;
     int l = 2 * i + 1;
@@ -16,45 +16,34 @@ void heapifyCompare(int *arr, int n, int i, int &count_compare)
     {
         swap(arr[i], arr[largest]);
 
-        heapifyCompare(arr, n, largest, count_compare);
+        heapify(arr, n, largest, count_compare);
     }
 }
 
-int countHeapSortCompare(int *arr, int n)
+int heapSort(int *arr, int n)
 {
     int count_compare = 0;
 
     for (int i = n / 2 - 1; ++count_compare && i >= 0; i--)
     {
-        heapifyCompare(arr, n, i, count_compare);
+        heapify(arr, n, i, count_compare);
     }
 
     for (int i = n - 1; ++count_compare && i > 0; i--)
     {
         swap(arr[0], arr[i]);
 
-        heapifyCompare(arr, i, 0, count_compare);
+        heapify(arr, i, 0, count_compare);
     }
 
     return count_compare;
 }
 
-void measure()
+void measure(int* a,int n)
 {
-    int n;
-    int *a = initRandomArray(n);
     int count_compare = 0;
-
-    cout << "Display?\nYes: 1\nNo: 0" << endl;
-    int choice;
-    cin >> choice;
-    if (choice == 1)
-    {
-        printArray(a, n);
-    }
-
     auto start = high_resolution_clock::now();
-    count_compare = countHeapSortCompare(a, n);
+    count_compare = heapSort(a, n);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
@@ -62,9 +51,4 @@ void measure()
     cout << "Comparision time: " << count_compare << endl;
     cout << "--------------------- " << endl;
     cout << "--------------------- " << endl;
-
-    if (choice == 1)
-    {
-        printArray(a, n);
-    }
 }

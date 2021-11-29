@@ -7,6 +7,4 @@
 using namespace std;
 using namespace std::chrono;
 
-void printArray(int *a, int n);
-int *initRandomArray(int &n);
-void measure();
+void measureHeap(int* a,int n);

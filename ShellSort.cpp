@@ -2,30 +2,46 @@
 
 using namespace std;
 
-void insertionSort2(long* data, int n, int gap) {
-	for (int i = gap; i < n; i += gap) {
-		for (int j = i; j >= gap; j -= gap) {
-			if (data[j] < data[j - gap]) {
-				swap(data[j], data[j - gap]);
-			}
-		}
+int maximumValue(int* data, int size) {
+	long max = data[0];
+	for (int i = 0; i < size; i++) {
+		if (max < data[i]) max = data[i];
+	}
+	return max;
+}
+
+void setValueNIL(int*& arr, int size) {
+	for (int i = 0; i < size; i++) {
+		arr[i] = 0;
 	}
 }
 
-void shellSort(long* data, int n) {
-	for (int h = n / 2; h > 2; h /= 2) { //h is the gap
-		for (int j = 0; j < h; j++) { //sort each sublist
-			insertionSort2(data, n - j, h);
-		}
+int* countingSort(int* data, int size) {
+	int max = maximumValue(data, size);
+	int* result = new int[size];
+	int* temp = new int[max + 1];
+	setValueNIL(temp, max + 1);
+	for (int i = 0; i < size; i++) {
+		temp[data[i]]++;
 	}
-	insertionSort2(data, n, 1);
+	cout << temp[0] << " ";
+	for (int i = 1; i < max + 1; i++) {
+		temp[i] += temp[i - 1];
+		cout << temp[i] << " ";
+	}
+	cout << endl;
+	for (int i = size - 1; i >= 0; i--) {
+		result[temp[data[i]] - 1] = data[i];
+		temp[data[i]]--;
+	}
+	return result;
 }
 
 int main() {
-	long data[10] = { 8, 9, 5, 3, 6, 3, 8, 1, 3, 99 };
-	shellSort(data, 10);
-	for (int i = 0; i < 10; i++) {
-		cout << data[i] << " ";
+	int data[10] = { 2, 5, 3, 0, 2, 3, 0, 3 };
+	int* result = countingSort(data, 8);
+	for (int i = 0; i < 8; i++) {
+		cout << result[i] << " ";
 	}
 	return 0;
 }

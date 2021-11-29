@@ -84,16 +84,19 @@ void measure(string sort_name, int *a, int n)
     if (sort_name == "flash-sort")
     {
         cout<<"Run flash";
+        long long count_compare = 0;
         //Call measure function
     }
     else if (sort_name == "heap-sort")
     {
         cout<<"Run heap";
+        long long count_compare = 0;
         //Call measure function
     }
     else if (sort_name == "merge-sort")
     {
         cout<<"Run merge";
+        long long count_compare = 0;
         //Call measure function
     }
 }

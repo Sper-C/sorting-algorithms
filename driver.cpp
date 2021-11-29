@@ -60,7 +60,9 @@ int main(int agrc, char **argv)
     int n;
     int *a = initRandomArray(n);
 
-    measureMerge(a, n);
+    cout << "-----------------------" << endl;
+    cout << "Run Time: " << measureMergeTime(a, n)<<endl;
+    cout << "Comparison: " << measureMergeComp(a, n)<<endl;
 
     system("pause");
     return 0;

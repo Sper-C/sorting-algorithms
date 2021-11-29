@@ -46,16 +46,18 @@ void mergeSort(int *a, int left, int right, int &count_compare)
     merge(a, left, mid, right, count_compare);
 }
 
-void measureMerge(int* a, int n)
+int measureMergeComp(int *a, int n)
 {
     int count_compare = 0;
-    auto start = high_resolution_clock::now();
     mergeSort(a, 0, n - 1, count_compare);
+    return count_compare;
+}
+
+double measureMergeTime(int *a, int n)
+{
+    auto start = high_resolution_clock::now();
+    mergeSort(a, 0, n - 1);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
-    cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
-
-    cout << "Comparision time: " << count_compare << endl;
-    cout << "--------------------- " << endl;
-    cout << "--------------------- " << endl;
+    return duration<double, milli>(runtime).count();
 }

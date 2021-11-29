@@ -1,6 +1,6 @@
 #include "flash.h"
 
-int insertionSortComp(int *a, int n)
+int insertionSortExper(int *a, int n)
 {
     int count_compare = 0;
     for (int i = 1; ++count_compare && i < n; i++)
@@ -16,7 +16,7 @@ int insertionSortComp(int *a, int n)
     return count_compare;
 }
 
-void flashSortComp(int a[], int n, long long &count_compare)
+void flashSortExper(int a[], int n, long long &count_compare)
 {
     int m = int(0.45 * n);
     int *l = new int[m];
@@ -76,13 +76,13 @@ void flashSortComp(int a[], int n, long long &count_compare)
     }
     delete[] l;
 
-    count_compare += insertionSortComp(a, n);
+    count_compare += insertionSortExper(a, n);
 }
 
 double measureFlash(int *a, int n, long long &count_compare)
 {
     auto start = high_resolution_clock::now();
-    flashSortComp(a, n, count_compare);
+    flashSortExper(a, n, count_compare);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     return duration<double, milli>(runtime).count();

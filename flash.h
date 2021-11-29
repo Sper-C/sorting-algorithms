@@ -8,4 +8,6 @@ using namespace std;
 using namespace std::chrono;
 
 void swap(int &a, int &b);
-void measureFlash(int* a,int n);
+void flashSort(int a[], int n);
+int measureFlashComp(int *a, int n);
+double measureFlashTime(int * a,int n);

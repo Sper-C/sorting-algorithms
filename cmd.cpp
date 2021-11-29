@@ -79,41 +79,22 @@ string inputOrder(string order, int *&a, int n)
     return order_name;
 }
 
-void measureTime(string sort_name, int *a, int n)
+void measure(string sort_name, int *a, int n)
 {
     if (sort_name == "flash-sort")
     {
         cout<<"Run flash";
-        //Call time measure function
+        //Call measure function
     }
     else if (sort_name == "heap-sort")
     {
         cout<<"Run heap";
-        //Call time measure function
+        //Call measure function
     }
     else if (sort_name == "merge-sort")
     {
         cout<<"Run merge";
-        //Call time measure function
-    }
-}
-
-void measureComp(string sort_name, int *a, int n)
-{
-    if (sort_name == "flash-sort")
-    {
-        cout<<"Run flash";
-        //Call comp measure function
-    }
-    else if (sort_name == "heap-sort")
-    {
-        cout<<"Run heap";
-        //Call comp measure function
-    }
-    else if (sort_name == "merge-sort")
-    {
-        cout<<"Run merge";
-        //Call comp measure function
+        //Call measure function
     }
 }
 
@@ -141,15 +122,15 @@ void cmd4(int argc, const char *argv[])
             cout << "Input size: " << size << endl;
 
             cout << "Running time: ";
-            measureTime(sort1, a, size);
+            measure(sort1, a, size);
             cout << " | ";
-            measureTime(sort2, a, size);
+            measure(sort2, a, size);
             cout << endl;
 
             cout << "Comparisions: ";
-            measureComp(sort1, a, size);
+            measure(sort1, a, size);
             cout << " | ";
-            measureComp(sort2, a, size);
+            measure(sort2, a, size);
             cout << endl;
         }
     }
@@ -178,15 +159,15 @@ void cmd5(int argc, const char *argv[])
         cout << "-----------------" << endl;
 
         cout << "Running time: ";
-        measureTime(sort1, a, stoi(size));
+        measure(sort1, a, stoi(size));
         cout << " | ";
-        measureTime(sort2, a, stoi(size));
+        measure(sort2, a, stoi(size));
         cout << endl;
 
         cout << "Comparisions: ";
-        measureComp(sort1, a, stoi(size));
+        measure(sort1, a, stoi(size));
         cout << " | ";
-        measureComp(sort2, a, stoi(size));
+        measure(sort2, a, stoi(size));
         cout << endl;
     }
 }

@@ -1,12 +1,28 @@
 #include "flash.h"
 
-int flashSortExperi(int a[], int n)
+int insertionSort(int *a, int n)
+{
+    int count_compare = 0;
+    for (int i = 1; ++count_compare && i < n; i++)
+    {
+        int x = a[i];
+        int j;
+        for (j = i - 1; (++count_compare && j >= 0) && (++count_compare && a[j] > x); j--)
+        {
+            a[j + 1] = a[j];
+        }
+        a[j + 1] = x;
+    }
+    return count_compare;
+}
+
+int flashSort(int a[], int n)
 {
     int count_compare = 0;
     //*Tính số bucket và khởi tạo chúng
     int m = int(0.45 * n);
     int *l = new int[m];
-    for (int i = 0;++count_compare && i < m; i++)
+    for (int i = 0; ++count_compare && i < m; i++)
     {
         l[i] = 0;
     }
@@ -15,16 +31,16 @@ int flashSortExperi(int a[], int n)
     int minVal = a[0];
     for (int i = 1; ++count_compare && i < n; i++)
     {
-        if (++count_compare&& a[i] < minVal)
+        if (++count_compare && a[i] < minVal)
             minVal = a[i];
-        if (++count_compare&&a[i] > a[max])
+        if (++count_compare && a[i] > a[max])
             max = i;
     }
     if (++count_compare && a[max] == minVal)
         return count_compare;
     //*Đếm số phần tử trong bucket
     double c1 = (double)(m - 1) / (a[max] - minVal);
-    for (int i = 0;++count_compare && i < n; i++)
+    for (int i = 0; ++count_compare && i < n; i++)
     {
         int k = int(c1 * (a[i] - minVal));
         ++l[k];
@@ -66,22 +82,11 @@ int flashSortExperi(int a[], int n)
     return count_compare;
 }
 
-void measure()
+void measureFlash(int *a, int n)
 {
-    int n;
-    int *a = initRandomArray(n);
     int count_compare = 0;
-
-    cout << "Display?\nYes: 1\nNo: 0" << endl;
-    int choice;
-    cin >> choice;
-    if (choice == 1)
-    {
-        printArray(a, n);
-    }
-
     auto start = high_resolution_clock::now();
-    count_compare = flashSortExperi(a, n);
+    count_compare = flashSort(a, n);
     auto stop = high_resolution_clock::now();
     auto runtime = stop - start;
     cout << "Run time: " << chrono::duration<double, milli>(runtime).count() << endl;
@@ -89,10 +94,4 @@ void measure()
     cout << "Comparision time: " << count_compare << endl;
     cout << "--------------------- " << endl;
     cout << "--------------------- " << endl;
-
-    if (choice == 1)
-    {
-        printArray(a, n);
-    }
 }
-

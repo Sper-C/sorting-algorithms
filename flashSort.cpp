@@ -7,37 +7,30 @@ void swap(int &a, int &b)
     a = a - b;
 }
 
-int insertionSort(int *a, int n)
+void insertionSort(int *a, int n)
 {
-    int count_compare = 0;
-    for (int i = 1; ++count_compare && i < n; i++)
+    for (int i = 1;i < n; i++)
     {
         int x = a[i];
         int j;
         for (j = i - 1; j >= 0 && a[j] > x; j--)
         {
-            //*So sánh với phần tử trước đó (i-1), nếu bé hơn thì bắt đầu dời chỗ.
-            //*Dời chỗ cho đến khi gặp phần tử nhỏ hơn phần tử thứ i hồi nãy (x).
+
             a[j + 1] = a[j];
-            count_compare += 2;
         }
-        count_compare += 2;
-        //*Sau đó chèn phần tử i hồi nãy (x) vào vị trí đã tìm ở vòng lặp trên.
         a[j + 1] = x;
     }
-    return count_compare;
 }
 
 void flashSort(int a[], int n)
 {
-    //*Tính số bucket và khởi tạo chúng
     int m = int(0.45 * n);
     int *l = new int[m];
     for (int i = 0; i < m; i++)
     {
         l[i] = 0;
     }
-    //*Tìm max và min
+
     int max = 0;
     int minVal = a[0];
     for (int i = 1; i < n; i++)
@@ -49,19 +42,19 @@ void flashSort(int a[], int n)
     }
     if (a[max] == minVal)
         return;
-    //*Đếm số phần tử trong bucket
+
     double c1 = (double)(m - 1) / (a[max] - minVal);
     for (int i = 0; i < n; i++)
     {
         int k = int(c1 * (a[i] - minVal));
         ++l[k];
     }
-    //*Tính chỉ số index của phần tử cuối mỗi bucket
+
     for (int i = 1; i < m; i++)
     {
         l[i] += l[i - 1];
     }
-    //*Hoán vị để sắp xếp
+
     swap(a[max], a[0]);
     int nmove = 0;
     int j = 0;
@@ -87,7 +80,7 @@ void flashSort(int a[], int n)
             ++nmove;
         }
     }
+    
     delete[] l;
-    //*Insertion sort từng bucket
     insertionSort(a, n);
 }

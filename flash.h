@@ -7,8 +7,5 @@
 using namespace std;
 using namespace std::chrono;
 
-void printArray(int *a, int n);
-int *initRandomArray(int &n);
 void swap(int &a, int &b);
-int insertionSort(int *a, int n);
-void measure();
+void measureFlash(int* a,int n);

@@ -1,19 +1,31 @@
 #include <iostream>
 using namespace std;
-
+// Hàm đổi chỗ hai phần tử
 void Swap(int &a, int &b)
 {
      int temp = a;
      a = b;
      b = temp;
 }
-
+/*
+     Tham sồ đầu vào của hàm:
+     - Mảng: a[]
+     - Số lượng phần tử trong mảng: n
+*/
 void bubbleSort(int a[], int n)
 {
+     // Chỉ cần xét từ 0 đến n-2 vì ta cần xét a[i] và a[i+1]
      for (int i = 0; i < n - 1; i++)
      {
+          /*   
+               Xét hai phần tử liên tiếp nhau trong dãy.
+               Chỉ xét đến n-i-1 vì sau mỗi lần so sánh và đổi chỗ thì luôn đưa
+               được phần tử lớn nhất ra cuối dãy và lần duyệt sau thì ta không cần 
+               xét đến phần tử lớn nhất đó nữa
+          */
           for (int j = 0; j < n - i - 1; j++)
           {
+               // So sánh và đối chỗ hai phần tử liên tiếp nhau
                if (a[j] > a[j + 1])
                {
                     Swap(a[j], a[j + 1]);

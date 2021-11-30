@@ -1,39 +1,56 @@
 #include <iostream>
 using namespace std;
+// Hàm đổi chỗ hai phần tử
 void Swap(int &a, int &b)
 {
      int temp = a;
      a = b;
      b = temp;
 }
+/*
+     Tham sồ đầu vào của hàm:
+     - Mảng: a[]
+     - Số lượng phần tử trong mảng: n
+*/
 void shakerSort(int a[], int n)
 {
+     // Lưu cận trên
      int left = 0;
+     // Lưu cận dưới
      int right = n - 1;
-     int mark = 0; // biến đánh dấu
+     // Biến đánh dấu
+     int mark = 0;
      while (left < right)
      {
-          // duyệt xuôi chiều
+          // Duyệt xuôi chiều
           for (int i = left; i < right; i++)
           {
                if (a[i] > a[i + 1])
                {
                     Swap(a[i], a[i + 1]);
-                    mark = i; // đánh dấu lại vị trí cận trên
-                    // đánh dấu lại vị trí mà từ vị trí đó -> n-1 thỏa tính tăng dần
+                    /* 
+                         Đánh dấu lại vị trí cận trên
+                         (đánh dấu lại vị trí mà từ vị trí đó -> n-1 thỏa tính tăng dần)
+                    */
+                    mark = i;
                }
           }
+          // Cập nhật lại cận trên
           right = mark;
-          // duyệt ngược chiều
+          // Duyệt ngược chiều
           for (int i = right; i > left; i--)
           {
                if (a[i] < a[i - 1])
                {
                     Swap(a[i], a[i - 1]);
-                    mark = i; // đánh dấu lại vị trí cận dưới
-                    // đánh dấu lại vị trí mà từ vị trí đó -> 0 thỏa tính giảm dần
+                    /* 
+                         Đánh dấu lại vị trí cận dưới
+                         (đánh dấu lại vị trí mà từ vị trí đó -> 0 thỏa tính giảm dần)
+                    */
+                    mark = i;
                }
           }
+          // Cập nhật lại cận trên
           left = mark;
      }
 }
